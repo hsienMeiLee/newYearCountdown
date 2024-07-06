@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <h2>Countdown to New Year</h2>
+    <div class="year">2025</div>
+    <div class="container">
+        <div class="days">00</div>
+        <div class="hours">00</div>
+        <div class="minutes">00</div>
+        <div class="seconds">00</div>
+    </div>
+
+    <script>
+        const dayEl = document.querySelector(".days");
+        const hourEl = document.querySelector(".hours");
+        const minuteEl = document.querySelector(".minutes");
+        const secondEl = document.querySelector(".seconds");
+
+        const newYearTime = new Date("January 1, 2025 00:00:00").getTime();
+
+        let s = 1000;
+        let m = s * 60;
+        let h = m * 60;
+        let d = h * 24;
+
+
+        updateTime();
+
+        function updateTime(){
+            const now = new Date().getTime();
+            const gap = newYearTime - now;
+            
+            const days = Math.floor(gap / d);
+            const hours = Math.floor((gap % d) / h);
+            const minutes = Math.floor((gap % h) / m);
+            const seconds = Math.floor((gap % m) / s);
+
+            dayEl.innerHTML = days;
+            hourEl.innerHTML = hours;
+            minuteEl.innerHTML = minutes;
+            secondEl.innerHTML = seconds;
+
+            setTimeout(() => {
+                updateTime();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
